@@ -11,7 +11,29 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Ticket.belongsTo(models.User, { as: 'passenger', foreignKey: 'userId' })
+      Ticket.belongsTo(models.User, { as: 'passenger', foreignKey: 'user_idd' })
+      Ticket.belongsTo(models.Aircraft, {as: 'aircraft', foreignKey: 'aircraft_id'})
+      Ticket.belongsTo(models.Rocket, {as: 'rocket', foreignKey: 'rocket_id'})
+      Ticket.belongsToMany(models.Airport, {
+        as: 'departureAirport',
+        through: 'DepartureAirport',
+        foreignKey: 'ticketId'
+      })
+      Ticket.belongsToMany(models.Planet, {
+        as: 'departurePlanet',
+        through: 'DeparturePlanet',
+        foreignKey: 'ticketId'
+      })
+      Ticket.belongsToMany(models.Airport, {
+        as: 'arrivalAirport',
+        through: 'ArrivalAirport',
+        foreignKey: 'ticketId'
+      })
+      Ticket.belongsToMany(models.Planet, {
+        as: 'arrivalPlanet',
+        through: 'ArrivalPlanet',
+        foreignKey: 'ticketId'
+      })
     }
   }
   Ticket.init({
@@ -22,10 +44,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE',
       field: 'user_id',
-      references: {
-        model: 'medium_users',
-        key: 'id'
-      }
+    },
+    aircraftId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      field: 'aircraft_id',
+    },
+    rocketId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      field: 'rocket_id',
     }
   }, {
     sequelize,
