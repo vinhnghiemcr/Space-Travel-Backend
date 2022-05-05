@@ -14,8 +14,20 @@ module.exports = {
       date: {
         type: Sequelize.DATE
       },
-      vehicle: {
-        type: Sequelize.STRING
+      userId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        field: 'user_id',
+      },
+      aircraftId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        field: 'aircraft_id',
+      },
+      rocketId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        field: 'rocket_id',
       },
       createdAt: {
         allowNull: false,

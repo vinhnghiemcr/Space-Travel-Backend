@@ -39,7 +39,6 @@ module.exports = (sequelize, DataTypes) => {
   Ticket.init({
     type: DataTypes.STRING,
     date: DataTypes.DATE,
-    vehicle: DataTypes.STRING,
     userId: {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE',

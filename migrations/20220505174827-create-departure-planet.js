@@ -9,10 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       ticketId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        field: 'ticket_id',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'tickets',
+          key: 'id'
+        }
       },
       planetId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        field: 'planet_id',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'planets',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
