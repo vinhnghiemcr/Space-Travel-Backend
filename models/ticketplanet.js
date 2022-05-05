@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'TicketPlanet',
+    tableName: 'ticket_planet'
   });
   return TicketPlanet;
 };
