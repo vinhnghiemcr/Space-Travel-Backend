@@ -14,8 +14,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   DeparturePlanet.init({
-    ticketId: DataTypes.INTEGER,
-    planetId: DataTypes.INTEGER
+    ticketId: {
+      type: DataTypes.INTEGER,
+      field: 'ticket_id',
+      onDelete: 'CASCADE',
+      references: {
+        model: 'tickets',
+        key: 'id'
+      }
+    },
+    planetId: {
+      type: DataTypes.INTEGER,
+      field: 'planet_id',
+      onDelete: 'CASCADE',
+      references: {
+        model: 'planets',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'DeparturePlanet',
