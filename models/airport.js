@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Airport',
+    tableName: 'airports'
   });
   return Airport;
 };
