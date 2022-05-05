@@ -11,12 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Ticket.belongsTo(models.User, { as: 'passenger', foreignKey: 'userId' })
     }
   }
   Ticket.init({
     type: DataTypes.STRING,
     date: DataTypes.DATE,
-    vehicle: DataTypes.STRING
+    vehicle: DataTypes.STRING,
+    userId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      field: 'user_id',
+      references: {
+        model: 'medium_users',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'Ticket',

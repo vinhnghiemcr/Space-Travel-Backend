@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ticket_planet', {
+    await queryInterface.createTable('ArrivalAirports', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,7 +11,7 @@ module.exports = {
       ticketId: {
         type: Sequelize.INTEGER
       },
-      planetId: {
+      airportId: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -25,6 +25,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('ticket_planet');
+    await queryInterface.dropTable('ArrivalAirports');
   }
 };
