@@ -27,7 +27,9 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     code: DataTypes.STRING,
     img: DataTypes.STRING,
-    location: DataTypes.STRING
+    location: DataTypes.STRING,
+    latitude: DataTypes.STRING,
+    longtidute: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Airport',
