@@ -17,7 +17,13 @@ module.exports = (sequelize, DataTypes) => {
   Rocket.init({
     name: DataTypes.STRING,
     type: DataTypes.STRING,
-    img: DataTypes.STRING
+    img: DataTypes.STRING, 
+    costPerLaunch: {
+      type: DataTypes.INTEGER,
+      field: 'cost_per_launch'
+    }
+      ,
+    discription: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'Rocket',
