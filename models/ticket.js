@@ -11,9 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Ticket.belongsTo(models.User, { as: 'passenger', foreignKey: 'user_idd' })
+      Ticket.belongsTo(models.User, { as: 'passenger', foreignKey: 'user_id' })
       Ticket.belongsTo(models.Aircraft, {as: 'aircraft', foreignKey: 'aircraft_id'})
       Ticket.belongsTo(models.Rocket, {as: 'rocket', foreignKey: 'rocket_id'})
+      Ticket.belongsTo(models.Airport, {as: 'departure airport', foreignKey: 'rocket_id'})
       Ticket.belongsToMany(models.Airport, {
         as: 'departureAirport',
         through: 'DepartureAirport',
