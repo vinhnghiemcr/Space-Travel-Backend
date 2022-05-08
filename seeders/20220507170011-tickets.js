@@ -2,6 +2,8 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('tickets', null, {})
+
     await queryInterface.bulkInsert('tickets', [
       {
         type: 'flight',
