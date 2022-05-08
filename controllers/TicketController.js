@@ -30,9 +30,31 @@ const createTicket = async (req, res) => {
     }
 }
 
+const updateTicket = async (req, res) => {
+    try {
+        const id = parseInt(req.params.id)
+        const ticket = await Ticket.update({ where: {id: id}, returning: true})
+        res.status(200).json(ticket)
+    } catch (error) {
+        throw error
+    }
+}
+
+const cancelTicket = async (req,res) => {
+    try {
+        const id = parseInt(req.params.id)
+        const ticket = await Ticket.delete({where: {id: id}})
+        res.status(200).json(ticket)
+    } catch (error) {
+        throw error
+    }
+}
+
 
 module.exports = {
     getTicketById,
     getTicketsOfUser,
-    createTicket
+    createTicket,
+    updateTicket,
+    cancelTicket
 }

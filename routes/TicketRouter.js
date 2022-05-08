@@ -8,8 +8,11 @@ router.get(
     '/tickets/user/:uid',
     middleware.stripToken,
     middleware.verifyToken,
+    ticket.getTicketsOfUser
 )
 
-router.post('/tickets')
+router.post('/tickets', ticket.createTicket)
 
-router.put('/tickets/:id')
+router.put('/tickets/:id', ticket.updateTicket)
+
+router.delete('tickets/:id', ticket.cancelTicket)
