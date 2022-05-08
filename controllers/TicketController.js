@@ -21,9 +21,18 @@ const getTicketsOfUser = async (req,res) => {
     }
 }
 
+const createTicket = async (req, res) => {
+    try {
+        const ticket = await Ticket.create(req.body)
+        res.status(201).json(ticket)
+    } catch (error) {
+        throw error
+    }
+}
 
 
 module.exports = {
     getTicketById,
-    getTicketsOfUser
+    getTicketsOfUser,
+    createTicket
 }
