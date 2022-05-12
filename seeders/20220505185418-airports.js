@@ -13,7 +13,7 @@ module.exports = {
       code : data[i][0].faa_ident,
       location: data[i][0].city + ', ' + data[i][0].state_full,
       latitude: data[i][0].latitude_sec,
-      longtitude: data[i][0].longtitude_sec,
+      longtitude: data[i][0].longitude_sec,
       createdAt: new Date(),
       updatedAt: new Date()
     }))

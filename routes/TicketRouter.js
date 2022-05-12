@@ -1,18 +1,20 @@
 const router = require('express').Router()
 const middleware = require('../middleware')
-const ticket = require('../models/ticket')
+const controller = require('../controllers/TicketController')
 
-router.get('/tickets/:id', ticket.getTicketByid)
+router.get('/:id', controller.GetTicketById)
 
 router.get(
-    '/tickets/user/:uid',
+    '/user/:uid',
     middleware.stripToken,
     middleware.verifyToken,
-    ticket.getTicketsOfUser
+    controller.GetTicketsOfUser
 )
 
-router.post('/tickets', ticket.createTicket)
+router.post('', controller.CreateTicket)
 
-router.put('/tickets/:id', ticket.updateTicket)
+router.put(':id', controller.UpdateTicket)
 
-router.delete('tickets/:id', ticket.cancelTicket)
+router.delete(':id', controller.CancelTicket)
+
+module.exports = router
