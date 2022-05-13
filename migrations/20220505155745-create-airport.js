@@ -17,7 +17,13 @@ module.exports = {
       img: {
         type: Sequelize.STRING
       },
-      location: {
+      city: {
+        type: Sequelize.STRING
+      },
+      state: {
+        type: Sequelize.STRING
+      },
+      state_full: {
         type: Sequelize.STRING
       },
       createdAt: {

@@ -5,7 +5,10 @@ module.exports = {
     await queryInterface.bulkInsert('flights', [
       {
         capacity: 100,
-        date: new Date(2022, 11, 23, 12, 0),
+        type: 'flight',
+        date: '2022-05-16',
+        time: '08:30',
+        price: 300,
         aircraft_id: 1,
         departure_airport_id: 1,
         arrival_airport_id: 2,
@@ -14,10 +17,37 @@ module.exports = {
       },
       {
         capacity: 100,
-        date: new Date(2022, 5, 16, 8, 0),
+        type: 'flight',
+        date: '2022-05-16',
+        time: '11:30',
+        price: 500,
         aircraft_id: 1,
         departure_airport_id: 1,
         arrival_airport_id: 2,        
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        capacity: 10,
+        type: 'space flight',
+        date: '2022-05-16',
+        time: '12:00',
+        price: 1100000,
+        aircraft_id: 1,
+        departure_planet_id: 1,
+        arrival_planet_id: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        capacity: 30,
+        type: 'space flight',
+        date: '2022-05-16',
+        time: '08:30',
+        price: 3000000,
+        aircraft_id: 1,
+        departure_planet_id: 4,
+        arrival_planet_id: 1,        
         createdAt: new Date(),
         updatedAt: new Date()
       }

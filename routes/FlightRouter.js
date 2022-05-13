@@ -3,6 +3,7 @@ const middleware = require('../middleware')
 const controller = require('../controllers/FlightController')
 
 router.get('/', controller.GetAllFlights)
+router.get('/search', controller.SearchFlights)
 
 // router.get(
 //     '/user/:uid',

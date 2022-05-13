@@ -12,7 +12,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY
+      },
+      time: {
+        type: Sequelize.STRING
+      },
+      price: {
+        type: Sequelize.INTEGER
+      },
+      type: {
+        type: Sequelize.STRING
       },
       aircraftId: {
         type: Sequelize.INTEGER,
@@ -20,6 +29,15 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'aircrafts',
+          key: 'id'
+        }
+      },
+      rocketId: {
+        type: Sequelize.INTEGER,
+        field: 'rocket_id',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'rockets',
           key: 'id'
         }
       },
@@ -38,6 +56,24 @@ module.exports = {
         onDelete: 'CASCADE',
         references: {
           model: 'airports',
+          key: 'id'
+        }
+      },
+      departurePlanetId: {
+        type: Sequelize.INTEGER,
+        field: 'departure_planet_id',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'planets',
+          key: 'id'
+        }
+      },
+      arrivalPlanetId: {
+        type: Sequelize.INTEGER,
+        field: 'arrival_planet_id',
+        onDelete: 'CASCADE',
+        references: {
+          model: 'planets',
           key: 'id'
         }
       },

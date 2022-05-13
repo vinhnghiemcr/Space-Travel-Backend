@@ -11,7 +11,9 @@ module.exports = {
     const airports = Object.keys(data).map( (i) => ({      
       name : data[i][0].facility_name,
       code : data[i][0].faa_ident,
-      location: data[i][0].city + ', ' + data[i][0].state_full,
+      city: data[i][0].city,
+      state: data[i][0].state,
+      state_full: data[i][0].state_full,
       latitude: data[i][0].latitude_sec,
       longtitude: data[i][0].longitude_sec,
       createdAt: new Date(),
