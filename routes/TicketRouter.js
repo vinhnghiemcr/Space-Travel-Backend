@@ -11,10 +11,10 @@ router.get(
     controller.GetTicketsOfUser
 )
 
-router.post('', controller.CreateTicket)
+router.post('/', controller.CreateTicket)
 
-router.put(':id', controller.UpdateTicket)
+router.put('/:id', controller.UpdateTicket)
 
-router.delete(':id', controller.CancelTicket)
+router.delete('/:id', controller.CancelTicket)
 
 module.exports = router

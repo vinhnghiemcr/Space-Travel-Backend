@@ -11,50 +11,42 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Ticket.belongsTo(models.User, { as: 'passenger', foreignKey: 'user_id' })
-      Ticket.belongsTo(models.Aircraft, {as: 'aircraft', foreignKey: 'aircraft_id'})
-      Ticket.belongsTo(models.Rocket, {as: 'rocket', foreignKey: 'rocket_id'})
-      Ticket.belongsTo(models.Airport, {as: 'departure airport', foreignKey: 'rocket_id'})
-      Ticket.belongsToMany(models.Airport, {
-        as: 'departureAirport',
-        through: 'DepartureAirport',
-        foreignKey: 'ticketId'
-      })
-      Ticket.belongsToMany(models.Planet, {
-        as: 'departurePlanet',
-        through: 'DeparturePlanet',
-        foreignKey: 'ticketId'
-      })
-      Ticket.belongsToMany(models.Airport, {
-        as: 'arrivalAirport',
-        through: 'ArrivalAirport',
-        foreignKey: 'ticketId'
-      })
-      Ticket.belongsToMany(models.Planet, {
-        as: 'arrivalPlanet',
-        through: 'ArrivalPlanet',
-        foreignKey: 'ticketId'
-      })
+      Ticket.belongsTo(models.User, { as: 'user', foreignKey: 'user_id' })
+      Ticket.belongsTo(models.Flight, {as: 'flight', foreignKey: 'flight_id'})
+      
     }
   }
   Ticket.init({
     type: DataTypes.STRING,
-    date: DataTypes.DATE,
+    passenger: DataTypes.JSON,
     userId: {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE',
       field: 'user_id',
+      references: {
+        model: 'users',
+        key: 'id'
+      }
+    },
+    flightId: {
+      type: DataTypes.INTEGER,
+      onDelete: 'CASCADE',
+      field: 'flight_id',
+      references: {
+        model: 'flights',
+        key: 'id'
+      }
     },
     aircraftId: {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE',
       field: 'aircraft_id',
-    },
-    rocketId: {
-      type: DataTypes.INTEGER,
-      onDelete: 'CASCADE',
-      field: 'rocket_id',
+      references: {
+        model: 'aircrafts',
+        key: 'id'
+      }
     }
+    
   }, {
     sequelize,
     modelName: 'Ticket',

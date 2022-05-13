@@ -1,10 +1,18 @@
 
-const { User, Ticket } = require('../models')
+const { User, Ticket, Flight } = require('../models')
 
 const GetTicketById = async (req,res) => {
     try {
         const id = parseInt(req.params.id)
-        const ticket = await Ticket.findOne({where: {id: id}})
+        const ticket = await Ticket.findOne({where: {id: id},
+            include: [
+                {association: 'flight',
+                include: [
+                    {association: 'aircraft', attributes: ['name', 'type']},
+                    {association: 'departure_airport', attributes: ['id','name', 'code']},
+                    {association: 'arrival_airport', attributes: ['id','name', 'code']}] 
+        }]
+        })
         res.status(200).json(ticket)
     } catch (error) {
         throw error
@@ -23,8 +31,31 @@ const GetTicketsOfUser = async (req,res) => {
 
 const CreateTicket = async (req, res) => {
     try {
-        const ticket = await Ticket.create(req.body)
-        res.status(201).json(ticket)
+        const {user, passenger, flight } = req.body 
+        console.log(user, passenger, flight)
+        // flight = await Flight.findOne({where: {id: flight.id}})
+        if (user){
+            console.log("GETTING USER")
+            const data = {
+                type: flight.type,
+                passenger,
+                userId: user.id,
+                flightId: flight.id
+            }
+            console.log(data, "With User")
+            const ticket = await Ticket.create(data)
+            res.status(201).json(ticket)
+        } else {
+            const data = {
+                type: flight.type,
+                passenger,
+                flightId: flight.id
+            }
+            console.log(data, "Without User")
+            const ticket = await Ticket.create(data)
+            console.log(Ticket, "Without User Ticket")
+            res.status(201).json(ticket)
+        } 
     } catch (error) {
         throw error
     }

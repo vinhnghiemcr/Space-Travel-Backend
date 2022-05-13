@@ -1,31 +1,46 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('departure_planet', {
+    await queryInterface.createTable('tickets', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ticketId: {
+      type: {
+        type: Sequelize.STRING
+      },
+      passenger: {
+        type: Sequelize.JSON
+      },
+      userId: {
         type: Sequelize.INTEGER,
-        field: 'ticket_id',
         onDelete: 'CASCADE',
+        field: 'user_id',
         references: {
-          model: 'tickets',
+          model: 'users',
           key: 'id'
         }
       },
-      planetId: {
+      flightId: {
         type: Sequelize.INTEGER,
-        field: 'planet_id',
         onDelete: 'CASCADE',
+        field: 'flight_id',
         references: {
-          model: 'planets',
+          model: 'flights',
           key: 'id'
         }
-      },
+      }, 
+      aircraftId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        field: 'aircraft_id',
+        references: {
+          model: 'aircrafts',
+          key: 'id'
+        }
+      },     
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -37,6 +52,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('departure_planet');
+    await queryInterface.dropTable('tickets');
   }
 };

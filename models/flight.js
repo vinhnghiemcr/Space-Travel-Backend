@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       Flight.belongsTo(models.Planet, {as: 'arrival_planet', foreignKey: 'arrival_planet_id'} )
       Flight.belongsTo(models.Planet, {as: 'departure_planet', foreignKey: 'departure_planet_id'} )
 
-      Flight.hasMany(models.Ticket, {as: 'tickes', foreignKey: 'flight_id'})
+      Flight.hasMany(models.Ticket, {as: 'tickets', foreignKey: 'flight_id'})
     }
   }
   Flight.init({
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
-    aircraftId: {
+    rocketId: {
       type: DataTypes.INTEGER,
       field: 'rocket_id',
       onDelete: 'CASCADE',
