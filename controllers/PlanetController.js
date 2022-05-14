@@ -1,5 +1,13 @@
 const { Planet } = require('../models')
 
+const GetPlanets = async (req, res) => {
+    try {
+        const planets = await Planet.findAll()
+        res.status(200).json(planets)
+    } catch (error) {
+        throw error
+    }
+}
 const GetPlanetById = async (req, res) => {
     try {
         const id = req.params.id
@@ -11,5 +19,6 @@ const GetPlanetById = async (req, res) => {
 }
 
 module.exports = {
+    GetPlanets,
     GetPlanetById
 }
