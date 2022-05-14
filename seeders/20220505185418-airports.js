@@ -4,7 +4,7 @@ const axios = require("axios")
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkDelete('airports', null, {})
-    const airportList = 'ATL,DFW,DEN,ORD,LAX,CLT,LAS,PHX,MCO,SEA,MIA,IAH,JFK,FLL,EWR,SFO,MSP,DTW,BOS,SLC,PHL,BWI,TPA,SAN,MDW,LGA,BNA,IAD,ALC,ABQ,ASP,ALA,LEI,AOR,APN,ACH,ASE,ASU,AHN,ATL,ACY,AGS,AUS,RAR,AYQ,BCD,BJZ,ASM,YEK,ARH,BSL,BZL,BAU,BPT,EIS,BJS,BEL,BFS,BHD,CNF,BEY'
+    const airportList = 'SAT,DCA,ATL,DFW,DEN,ORD,LAX,CLT,LAS'
     
     const res = await axios.get(`https://api.aviationapi.com/v1/airports?apt=${airportList}`)
     const data = res.data

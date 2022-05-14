@@ -8,7 +8,7 @@ module.exports = {
     const rockets = res.data.map((rocket) => ({
       name: rocket.rocket_name,
       type: rocket.rocket_type,
-      img: rocket.flickr_images[0],
+      img: rocket.flickr_images,
       cost_per_launch: rocket.cost_per_launch,
       discription: rocket.description,
       createdAt: new Date(),
