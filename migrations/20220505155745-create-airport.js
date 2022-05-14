@@ -26,6 +26,15 @@ module.exports = {
       state_full: {
         type: Sequelize.STRING
       },
+      manager: {
+        type: Sequelize.STRING
+      },
+      managerPhone: {
+        type: Sequelize.STRING
+      },
+      elevation: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

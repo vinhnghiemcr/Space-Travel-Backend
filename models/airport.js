@@ -30,6 +30,9 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     state_full: DataTypes.STRING,
+    manager: DataTypes.STRING,
+    managePhone: DataTypes.STRING,
+    elevation: DataTypes.STRING,
     latitude: DataTypes.STRING,
     longtitude: DataTypes.STRING
   }, {

@@ -16,6 +16,9 @@ module.exports = {
       state_full: data[i][0].state_full,
       latitude: data[i][0].latitude_sec,
       longtitude: data[i][0].longitude_sec,
+      manager: data[i][0].manager,
+      managerPhone: data[i][0].manager_phone,
+      elevation: data[i][0].elevation,
       createdAt: new Date(),
       updatedAt: new Date()
     }))
