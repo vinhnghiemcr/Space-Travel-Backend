@@ -17,6 +17,27 @@ module.exports = {
       img: {
         type: Sequelize.STRING
       },
+      num_of_moons: {
+        type: Sequelize.INTEGER
+      },
+      density: {
+        type: Sequelize.FLOAT
+      },
+      gravity: {
+        type: Sequelize.FLOAT
+      },
+      equaRadius: {
+        type: Sequelize.INTEGER
+      },
+      avgTemp: {
+        type: Sequelize.INTEGER
+      },
+      mass: {
+        type: Sequelize.JSON
+      },
+      vol: {
+        type: Sequelize.JSON
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

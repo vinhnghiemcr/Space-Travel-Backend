@@ -19,6 +19,13 @@ module.exports = {
                       name: planet.englishName,
                       code: planet.id,
                       img: null,
+                      num_of_moons: planet.moons ? planet.moons.length : 0,
+                      density: planet.density,
+                      gravity: planet.gravity,
+                      equaRadius: planet.equaRadius,
+                      avgTemp: planet.avgTemp,
+                      mass: JSON.stringify(planet.mass),
+                      vol: JSON.stringify(planet.vol),
                       createdAt: new Date(),
                       updatedAt: new Date()
                     }))
