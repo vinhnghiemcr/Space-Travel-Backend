@@ -14,6 +14,9 @@ module.exports = {
       passenger: {
         type: Sequelize.JSON
       },
+      qr: {
+        type: Sequelize.STRING
+      },
       userId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',

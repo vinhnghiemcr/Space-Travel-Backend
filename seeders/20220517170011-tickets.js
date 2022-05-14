@@ -8,6 +8,7 @@ module.exports = {
       {
         type: 'flight',
         passenger: '{"fname": "Nghiem", "lname": "Truong", "dob": "2000-01-01"}',
+        qr: null,
         user_id: 1,
         flight_id: 1,
         createdAt: new Date(),
@@ -16,6 +17,7 @@ module.exports = {
       {
         type: 'space flight',
         passenger: '{"fname": "Nghiem", "lname": "Truong", "dob": "2000-01-01"}',
+        qr: null,
         user_id: 1,
         flight_id: 3,
         createdAt: new Date(),

@@ -22,7 +22,15 @@ const GetTicketById = async (req,res) => {
 const GetTicketsOfUser = async (req,res) => {
     try {
         const userId = parseInt(req.params.uid)
-        const tickets = await Ticket.findAll({where: { user_id: userId}})
+        const tickets = await Ticket.findAll({where: { user_id: userId},
+            include: [
+                {association: 'flight',
+                include: [
+                    {association: 'aircraft', attributes: ['name', 'type']},
+                    {association: 'departure_airport', attributes: ['id','name', 'code']},
+                    {association: 'arrival_airport', attributes: ['id','name', 'code']}] 
+                }]       
+        })
         res.status(200).json(tickets)
     } catch (error) {
         throw error
@@ -64,7 +72,7 @@ const CreateTicket = async (req, res) => {
 const UpdateTicket = async (req, res) => {
     try {
         const id = parseInt(req.params.id)
-        const ticket = await Ticket.update({ where: {id: id}, returning: true})
+        const ticket = await Ticket.update(req.body , { where: {id: id}, returning: true, raw: true})
         res.status(200).json(ticket)
     } catch (error) {
         throw error

@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, DATE
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Ticket extends Model {
@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   Ticket.init({
     type: DataTypes.STRING,
     passenger: DataTypes.JSON,
+    qr: DataTypes.STRING,
     userId: {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE',
