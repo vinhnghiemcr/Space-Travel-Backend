@@ -4,16 +4,24 @@ const { User, Ticket, Flight } = require('../models')
 const GetTicketById = async (req,res) => {
     try {
         const id = parseInt(req.params.id)
+        console.log(id, "ID")
+        if (id.toString() === 'NaN') {
+           return res.status(404).send({msg: "Page not found"})
+        }
         const ticket = await Ticket.findOne({where: {id: id},
             include: [
                 {association: 'flight',
                 include: [
                     {association: 'aircraft', attributes: ['name', 'type']},
+                    {association: 'rocket', attributes: ['name', 'type']},
                     {association: 'departure_airport', attributes: ['id','name', 'code']},
-                    {association: 'arrival_airport', attributes: ['id','name', 'code']}] 
+                    {association: 'departure_planet', attributes: ['id','name', 'code']},
+                    {association: 'arrival_airport', attributes: ['id','name', 'code']},
+                    {association: 'arrival_planet', attributes: ['id','name', 'code']}
+                ] 
         }]
         })
-        res.status(200).json(ticket)
+        return res.status(200).json(ticket)
     } catch (error) {
         throw error
     }
@@ -22,16 +30,23 @@ const GetTicketById = async (req,res) => {
 const GetTicketsOfUser = async (req,res) => {
     try {
         const userId = parseInt(req.params.uid)
+        if (userId.toString() === 'NaN') {
+            return res.status(404).send({msg: "Page not found"})
+         }
         const tickets = await Ticket.findAll({where: { user_id: userId},
             include: [
                 {association: 'flight',
                 include: [
                     {association: 'aircraft', attributes: ['name', 'type']},
+                    {association: 'rocket', attributes: ['name', 'type']},
                     {association: 'departure_airport', attributes: ['id','name', 'code']},
-                    {association: 'arrival_airport', attributes: ['id','name', 'code']}] 
+                    {association: 'departure_planet', attributes: ['id','name', 'code']},
+                    {association: 'arrival_airport', attributes: ['id','name', 'code']},
+                    {association: 'arrival_planet', attributes: ['id','name', 'code']}
+                ] 
                 }]       
         })
-        res.status(200).json(tickets)
+        return res.status(200).json(tickets)
     } catch (error) {
         throw error
     }
@@ -40,8 +55,6 @@ const GetTicketsOfUser = async (req,res) => {
 const CreateTicket = async (req, res) => {
     try {
         const {user, passenger, flight } = req.body 
-        console.log(user, passenger, flight)
-        // flight = await Flight.findOne({where: {id: flight.id}})
         if (user){
             console.log("GETTING USER")
             const data = {
@@ -52,7 +65,7 @@ const CreateTicket = async (req, res) => {
             }
             console.log(data, "With User")
             const ticket = await Ticket.create(data)
-            res.status(201).json(ticket)
+            return res.status(201).json(ticket)
         } else {
             const data = {
                 type: flight.type,
@@ -62,7 +75,7 @@ const CreateTicket = async (req, res) => {
             console.log(data, "Without User")
             const ticket = await Ticket.create(data)
             console.log(Ticket, "Without User Ticket")
-            res.status(201).json(ticket)
+            return res.status(201).json(ticket)
         } 
     } catch (error) {
         throw error
@@ -72,8 +85,24 @@ const CreateTicket = async (req, res) => {
 const UpdateTicket = async (req, res) => {
     try {
         const id = parseInt(req.params.id)
-        const ticket = await Ticket.update(req.body , { where: {id: id}, returning: true, raw: true})
-        res.status(200).json(ticket)
+        if (id.toString() === 'NaN') {
+            return res.status(404).send({msg: "Page not found"})
+         }
+        await Ticket.update(req.body , { where: {id: id}})
+        const ticket = await Ticket.findOne({where: {id: id},
+            include: [
+                {association: 'flight',
+                include: [
+                    {association: 'aircraft', attributes: ['name', 'type']},
+                    {association: 'rocket', attributes: ['name', 'type']},
+                    {association: 'departure_airport', attributes: ['id','name', 'code']},
+                    {association: 'departure_planet', attributes: ['id','name', 'code']},
+                    {association: 'arrival_airport', attributes: ['id','name', 'code']},
+                    {association: 'arrival_planet', attributes: ['id','name', 'code']}
+                ] 
+                }]
+        })
+        return res.status(200).json(ticket)
     } catch (error) {
         throw error
     }
@@ -82,8 +111,11 @@ const UpdateTicket = async (req, res) => {
 const CancelTicket = async (req,res) => {
     try {
         const id = parseInt(req.params.id)
+        if (id.toString() === 'NaN') {
+            return res.status(404).send({msg: "Page not found"})
+         }
         const ticket = await Ticket.delete({where: {id: id}})
-        res.status(200).json(ticket)
+        return res.status(200).json(ticket)
     } catch (error) {
         throw error
     }
