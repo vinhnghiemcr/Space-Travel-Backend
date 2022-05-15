@@ -39,11 +39,11 @@ const Register = async (req, res) => {
 
 const UpdateProfile = async (req, res) => {
   try {
-    const { newName, newTrailName } = req.body
+    const { email, fname, lname } = req.body
     const { password, newPassword } = req.body
     const user = await User.findByPk(req.params.userId)
     if (
-      user &&
+      user && password &&
       (await middleware.comparePassword(
         password,
         user.dataValues.passwordDigest
@@ -53,13 +53,17 @@ const UpdateProfile = async (req, res) => {
         let passwordDigest = await middleware.hashPassword(newPassword)
         await user.update({ passwordDigest })
       }
-      if (newName) {
-        await user.update({ name: newName })
+      if (email) {
+        await user.update({ email: email })
       }
-      if (newTrailName) {
-        await user.update({ trailName: newTrailName })
+      if (fname) {
+        await user.update({ fname: fname })
+      }
+      if (lname) {
+        await user.update({ lname: lname })
       }
       await user.save()
+      delete user.passwordDigest
       return res.send({ status: 'Ok', payload: user })
     }
     res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
@@ -70,10 +74,9 @@ const DeleteUser = async (req, res) => {
   try {
     const { password } = req.body
     const userId = parseInt(req.params.userId)
-    console.log(userId, password, 'UserId Password')
     const user = await User.findByPk(userId)
     if (
-      user &&
+      user && password &&
       (await middleware.comparePassword(
         password,
         user.dataValues.passwordDigest
@@ -86,81 +89,12 @@ const DeleteUser = async (req, res) => {
       })
     }
     res.status(401).send({ status: 'Error', msg: 'Unauthorized' })
-  } catch (error) {}
+  } catch (error) {
+    throw error
+  }
 }
 
-  const FollowingAnUser = async (req, res) => {
-    try {
-      const userId = parseInt(req.params.userId)
-      const followingId = parseInt(req.params.followingId)
-      const follower = await UserFollower.create({ 
-        user_id: userId,
-        follower_id: followingId,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      })
-    
-      const followingList = await User.findAll({
-        include: [{ model: User, as: 'followers', through: { attributes: [] } }],
-        raw: true,
-        where: { id: userId }
-      })
-      followingList.forEach((user) => {
-        delete user.passwordDigest
-        delete user['followers.passwordDigest']
-       } )
-      res.status(200).json(followingList)
-      return 
-    } catch (error) {
-      throw error
-    }
-  }
-
-  const UnfollowingAnUser = async (req, res) => {
-    try {
-      const userId = parseInt(req.params.userId)
-      const followingId = parseInt(req.params.followingId)
-      const follower = await UserFollower.findOne({ 
-        where: {
-          user_id: userId,
-          follower_id: followingId,
-        }
-      })
-      if(follower) {await follower.destroy()}
-    
-      const followingList = await User.findAll({
-        include: [{ model: User, as: 'followers', through: { attributes: [] } }],
-        raw: true,
-        where: { id: userId }
-      })
-      followingList.forEach((user) => {
-        delete user.passwordDigest
-        delete user['followers.passwordDigest']
-       } )
-      res.status(200).json(followingList)
-      return 
-    } catch (error) {
-      throw error
-    }
-  }
-
-  const GetAllFollowers = async (req, res) => {
-    try {
-      const userId = parseInt(req.params.userId)
-      const followingList = await User.findAll({
-        include: [{ model: User, as: 'followers', through: { attributes: [] } }],
-        raw: true,
-        where: { id: userId }
-      })
-      followingList.forEach((user) => {
-        delete user.passwordDigest
-        delete user['followers.passwordDigest']
-       } )
-      res.status(200).json(followingList)
-    } catch (error) {
-      throw error
-    }
-  }
+ 
 
 const CheckSession = async (req, res) => {
   const { payload } = res.locals
@@ -172,8 +106,5 @@ module.exports = {
   Register,
   UpdateProfile,
   CheckSession,
-  DeleteUser,
-  FollowingAnUser,
-  UnfollowingAnUser,
-  GetAllFollowers
+  DeleteUser
 }

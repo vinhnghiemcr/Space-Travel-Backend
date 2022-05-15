@@ -10,11 +10,7 @@ router.put(
   middleware.verifyToken,
   controller.UpdateProfile
 )
-router.get('/:userId/friendList', 
-  middleware.stripToken,
-  middleware.verifyToken,
-  controller.GetAllFollowers
-)
+
 router.get(
   '/session',
   middleware.stripToken,

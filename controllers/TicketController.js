@@ -55,28 +55,33 @@ const GetTicketsOfUser = async (req,res) => {
 const CreateTicket = async (req, res) => {
     try {
         const {user, passenger, flight } = req.body 
-        if (user){
-            console.log("GETTING USER")
-            const data = {
-                type: flight.type,
-                passenger,
-                userId: user.id,
-                flightId: flight.id
+        const foundflight = await Flight.findOne({where: {id: flight.id}})
+        if (foundflight.capacity > 0){
+            if (user){                
+                const data = {
+                    type: flight.type,
+                    passenger,
+                    userId: user.id,
+                    flightId: flight.id
+                }
+                const ticket = await Ticket.create(data)
+                foundflight.capacity = foundflight.capacity - 1
+                await foundflight.save()
+                return res.status(201).json(ticket)                
+                
+            } else {
+                const data = {
+                    type: flight.type,
+                    passenger,
+                    flightId: flight.id
+                }
+                const ticket = await Ticket.create(data)
+                foundflight.capacity = foundflight.capacity - 1
+                await foundflight.save()
+                return res.status(201).json(ticket)
             }
-            console.log(data, "With User")
-            const ticket = await Ticket.create(data)
-            return res.status(201).json(ticket)
-        } else {
-            const data = {
-                type: flight.type,
-                passenger,
-                flightId: flight.id
-            }
-            console.log(data, "Without User")
-            const ticket = await Ticket.create(data)
-            console.log(Ticket, "Without User Ticket")
-            return res.status(201).json(ticket)
-        } 
+        }
+        
     } catch (error) {
         throw error
     }

@@ -5,7 +5,7 @@ const GetAircraftById = async (req, res) => {
         const id = req.params.id
         if (id) {
             const aircraft = await Aircraft.findOne({where: {id: id}})
-            res.status(200).json(aircraft)
+            return res.status(200).json(aircraft)
         }
         return res.status(404).send({msg: "Could not found"})
     } catch (error) {
