@@ -12,12 +12,13 @@
 
 - [Space Travel Frontend](https://github.com/vinhnghiemcr/Space-Travel_Frontend)
 - [Space Travel Backend](https://github.com/vinhnghiemcr/Space-Travel-Backend)
+- [infinitude-and-beyond.herokuapp.com](https://infinitude-and-beyond.herokuapp.com/)
 
 ---
 
 ### **_Description_**
 
-##### The app "Space Travel" enables users to book flight ticket like a normal travel website. However, users can also reserve spaceflight tickets to other planets as the space travel is blooming. Authenticated users can save the ticket info and save points for future use. Throughout the app, I will implement full CRUD functionality.
+##### The app "Space Travel" enables users to book flight tickets like a normal travel website. However, users can also reserve spaceflight tickets to other planets as the space travel is booming. Authenticated users can save the ticket info and save points for future use. Throughout the app, I will implement full CRUD functionality.
 
 ##### Navigate to [SpaceTravel]() to view reserve your seat.
 
@@ -25,10 +26,10 @@
 
 ### **_Technologies Used_**
 
-- Technologies: PostgreSQL, Express, Vue, Node, HTML, CSS, JavaScript
+- Technologies: PostgreSQL, Express, Vue, Node, HTML, CSS, JavaScript, JWT
 - Styling and Images: Google Fonts, Unsplash, Imgur
 - Project Planning: [Trello](https://trello.com/b/7z74qGhO/space-travel)
-- Development Tools: Visual Studio Code
+- Development Tools: Visual Studio Code, Heroku
 
 ---
 
@@ -43,50 +44,35 @@
   - Seed the database: node seed/initializeData.js.
   - Start the server: npm run dev.
 - Frontend:
-  - cd into client/ directory
   - Install all dependencies: npm install
-  - Start up the app: npm start.
-
----
-
-### **_Entity Relationship Diagram (ERD)_**
-
-## ![Image]()
-
----
-
-### **_Component Hierarchy Diagram_**
-
-## ![Image]()
+  - Start up the app: npm run serve.
 
 ---
 
 ### **_Screenshots_**
-
+![](https://github.com/vinhnghiemcr/Space-Travel_Frontend/blob/main/src/assets/Screenshot%202022-05-15%20202030.png?raw=true)
 ---
 
 ### **_User Story_**
 
-- [ ] User authentication and authorization
-- [ ] Update user profile
-- [ ] Booking your flight ticket
-- [ ] View details of a particular flight ticket
-- [ ] Booking your space flight ticket
-- [ ] View details of a particular space flight ticket
-- [ ] View history of booked tickets
+- [x] User authentication and authorization
+- [x] Update user profile
+- [x] Booking your flight ticket
+- [x] View details of a particular flight ticket
+- [x] Booking your space flight ticket
+- [x] View details of a particular space flight ticket
+- [x] View history of booked tickets
 
 ---
 
 ### **_Future Updates_**
 
-- [ ] User can change flight ticket
+- [x] User can change flight ticket
 - [ ] User can view the weather of destination
-- [ ] Intergrate Google Map API
+- [x] Intergrate Google Map API
 
 ---
 
 ### **_Credits_**
 
-##### **Unsplash:** [unsplash.com](https://unsplash.com/)
-
-##### **Imgur:** [imgur.com](https://imgur.com/)
+##### **Kotay:** [codepen.cio/kotay](https://codepen.io/kotay/pen/qBXgem)
