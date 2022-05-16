@@ -13,8 +13,8 @@ const GetPlanetById = async (req, res) => {
         const id = parseInt(req.params.id)
         if (id) {
             const planet = await Planet.findOne({where: {id: id}})
-            res.status(200).json(planet)
-        } else res.status(404).send({msg: "Could not found"})
+            return res.status(200).json(planet)
+        } else return res.status(404).send({msg: "Could not found"})
     } catch (error) {
         throw error
     }

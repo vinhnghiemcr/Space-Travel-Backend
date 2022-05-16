@@ -13,7 +13,7 @@ const GetAllFlights = async (req, res) => {
                 {association: 'departure_airport', attributes: ['id','name', 'code']},
                 {association: 'arrival_airport', attributes: ['id','name', 'code']}
             ]})
-            res.status(200).json(flights)
+            return res.status(200).json(flights)
         } else if (type === 'space flight'){
             const flights = await Flight.findAll({
                 where: {type: type},
@@ -22,8 +22,8 @@ const GetAllFlights = async (req, res) => {
                 {association: 'departure_planet', attributes: ['id','name', 'code']},
                 {association: 'arrival_planet', attributes: ['id','name', 'code']}
             ]})
-            res.status(200).json(flights)
-        } else res.status(404).send({msg: `Could't find results for type: ${type}`})
+            return res.status(200).json(flights)
+        } else return res.status(404).send({msg: `Could't find results for type: ${type}`})
     } catch (error) {
         throw error
     }
@@ -58,7 +58,7 @@ const SearchFlights = async (req, res) => {
                     {association: 'arrival_airport', attributes: ['id','name', 'code']}
                 ]
             })
-            res.status(200).json(flights)
+            return res.status(200).json(flights)
         } else if (type === 'space flight') {
             const planet1 = await Planet.findOne({
                 where: {
@@ -85,8 +85,8 @@ const SearchFlights = async (req, res) => {
                     {association: 'arrival_planet', attributes: ['id','name', 'code']}
                 ]
             })
-            res.status(200).json(flights)
-        } else res.status(404).send(`Coundn't find the ${type}`)
+            return res.status(200).json(flights)
+        } else return res.status(404).send(`Coundn't find the ${type}`)
         
     } catch (error) {
         throw error

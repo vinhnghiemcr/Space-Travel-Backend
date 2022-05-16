@@ -4,7 +4,6 @@ const { User, Ticket, Flight } = require('../models')
 const GetTicketById = async (req,res) => {
     try {
         const id = parseInt(req.params.id)
-        console.log(id, "ID")
         if (id.toString() === 'NaN') {
            return res.status(404).send({msg: "Page not found"})
         }
@@ -93,7 +92,7 @@ const UpdateTicket = async (req, res) => {
         if (id.toString() === 'NaN') {
             return res.status(404).send({msg: "Page not found"})
          }
-        await Ticket.update(req.body , { where: {id: id}})
+        await Ticket.update({passenger: req.body} , { where: {id: id}})
         const ticket = await Ticket.findOne({where: {id: id},
             include: [
                 {association: 'flight',
@@ -119,7 +118,7 @@ const CancelTicket = async (req,res) => {
         if (id.toString() === 'NaN') {
             return res.status(404).send({msg: "Page not found"})
          }
-        const ticket = await Ticket.delete({where: {id: id}})
+        const ticket = await Ticket.destroy({where: {id: id}})
         return res.status(200).json(ticket)
     } catch (error) {
         throw error
